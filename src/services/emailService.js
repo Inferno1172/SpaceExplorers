@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 // ==================================================
 module.exports.sendPasswordResetEmail = (email, resetToken, callback) => {
   // Construct reset link for frontend
-  const resetUrl = `http://localhost:3000/users/reset-password?token=${resetToken}`;
+  const resetUrl = `http://localhost:3000/reset-password.html?token=${resetToken}`;
 
   // Define email content
   const mailOptions = {
@@ -32,6 +32,6 @@ module.exports.sendPasswordResetEmail = (email, resetToken, callback) => {
     `,
   };
 
-  // Send email using callback
-  transporter.sendMail(mailOptions, callback);
+  // Send email
+  return transporter.sendMail(mailOptions, callback);
 };

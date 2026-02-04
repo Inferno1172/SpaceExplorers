@@ -18,12 +18,12 @@ body {
 
 /* background video */
 .bg-video {
- position: absolute; 
- inset: 0; 
- width: 100%; 
- height: 100%; 
- object-fit: cover; 
- z-index: -1;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .hero-title {
@@ -45,4 +45,74 @@ body {
   src: url("/assets/fonts/StarJedi.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45);
+
+  color: #fff;
+}
+
+/* Form text color */
+.glass-card h1,
+.glass-card label,
+.glass-card p,
+.glass-card a {
+  color: #fff;
+}
+
+/* Inputs */
+.glass-card .form-control {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.glass-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.glass-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: #ffe81f;
+  box-shadow: 0 0 0 0.2rem rgba(255, 232, 31, 0.25);
+}
+
+/* Button */
+/* Button */
+.glass-card .btn {
+  background: linear-gradient(45deg, #ffe81f, #e6c200);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.glass-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 232, 31, 0.4);
+  background: linear-gradient(45deg, #e6c200, #ffe81f);
+}
+
+/* Links */
+.glass-card a {
+  color: #ffe81f;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.glass-card a:hover {
+  color: #fff;
+  text-decoration: underline;
 }

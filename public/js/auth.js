@@ -125,6 +125,82 @@ if (registerForm) {
   });
 }
 
+// Handle Forgot Password Form
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const forgotBtn = document.getElementById("forgotBtn");
+
+    if (!email) {
+      showError("Please enter your email");
+      return;
+    }
+
+    try {
+      setButtonLoading(forgotBtn, true);
+
+      const response = await API.forgotPassword(email);
+
+      showSuccess(response.message || "If that email exists, a reset link has been sent.");
+      forgotPasswordForm.reset();
+      
+    } catch (error) {
+      showError(error.message || "Request failed. Please try again.");
+    } finally {
+        setButtonLoading(forgotBtn, false);
+    }
+  });
+}
+
+// Handle Reset Password Form
+const resetPasswordForm = document.getElementById("resetPasswordForm");
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const resetBtn = document.getElementById("resetBtn");
+
+    // Get token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+
+    if (!token) {
+      showError("Invalid or missing reset token.");
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      showError("Password must be at least 8 characters.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      showError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      setButtonLoading(resetBtn, true);
+
+      const response = await API.resetPassword(token, newPassword);
+
+      showSuccess("Password reset successful! Redirecting to login...");
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
+    } catch (error) {
+      showError(error.message || "Reset failed. valid or expired token.");
+      setButtonLoading(resetBtn, false);
+    }
+  });
+}
+
 // Redirect logged-in users away from auth pages
 window.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
