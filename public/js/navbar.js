@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Get DOM elements
     const navbar = document.querySelector(".navbar");
     const navLinks = document.querySelectorAll(".nav-link");
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+    const mobileNavLinks = document.querySelectorAll(".offcanvas-body .nav-link");
     const offcanvas = document.getElementById("mobileMenu");
     const bootstrap = window.bootstrap; // Declare the bootstrap variable
 
@@ -224,11 +224,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const navUsername = document.getElementById('navUsername');
         const navPoints = document.getElementById('navPoints');
 
+        const mobileLoginNav = document.getElementById('mobileLoginNav');
+        const mobileRegisterNav = document.getElementById('mobileRegisterNav');
+        const mobileUserNav = document.getElementById('mobileUserNav');
+        const mobileLogoutNav = document.getElementById('mobileLogoutNav');
+        const mobileNavUsername = document.getElementById('mobileNavUsername');
+        const mobileNavPoints = document.getElementById('mobileNavPoints');
+
         if (!token) {
             if (loginNav) loginNav.classList.remove('d-none');
             if (registerNav) registerNav.classList.remove('d-none');
             if (userNav) userNav.classList.add('d-none');
             if (logoutNav) logoutNav.classList.add('d-none');
+
+            if (mobileLoginNav) mobileLoginNav.classList.remove('d-none');
+            if (mobileRegisterNav) mobileRegisterNav.classList.remove('d-none');
+            if (mobileUserNav) mobileUserNav.classList.add('d-none');
+            if (mobileLogoutNav) mobileLogoutNav.classList.add('d-none');
             return;
         }
 
@@ -239,6 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (registerNav) registerNav.classList.remove('d-none');
             if (userNav) userNav.classList.add('d-none');
             if (logoutNav) logoutNav.classList.add('d-none');
+
+            if (mobileLoginNav) mobileLoginNav.classList.remove('d-none');
+            if (mobileRegisterNav) mobileRegisterNav.classList.remove('d-none');
+            if (mobileUserNav) mobileUserNav.classList.add('d-none');
+            if (mobileLogoutNav) mobileLogoutNav.classList.add('d-none');
             return;
         }
 
@@ -248,6 +265,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (userNav) userNav.classList.remove('d-none');
         if (logoutNav) logoutNav.classList.remove('d-none');
         if (navUsername) navUsername.textContent = payload.username;
+
+        if (mobileLoginNav) mobileLoginNav.classList.add('d-none');
+        if (mobileRegisterNav) mobileRegisterNav.classList.add('d-none');
+        if (mobileUserNav) mobileUserNav.classList.remove('d-none');
+        if (mobileLogoutNav) mobileLogoutNav.classList.remove('d-none');
+        if (mobileNavUsername) mobileNavUsername.textContent = payload.username;
 
         // Fetch latest points
         try {
@@ -259,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 const userData = await response.json();
                 if (navPoints) navPoints.textContent = userData.points || 0;
+                if (mobileNavPoints) mobileNavPoints.textContent = userData.points || 0;
             }
         } catch (error) {
             console.error('Failed to fetch user points:', error);
@@ -269,6 +293,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        });
+    }
+
+    const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+    if (mobileLogoutBtn) {
+        mobileLogoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('token');
             window.location.href = 'index.html';

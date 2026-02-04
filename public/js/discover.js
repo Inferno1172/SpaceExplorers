@@ -184,6 +184,18 @@ async function handleDiscovery(planetId) {
 }
 
 function showLoginRequired() {
+    // Hide fuel indicator when not logged in
+    const fuelIndicator = document.getElementById('fuelIndicator');
+    if (fuelIndicator) {
+        fuelIndicator.style.display = 'none';
+    }
+
+    // Hide discovered systems section when not logged in
+    const discoveredSection = document.querySelector('.my-5');
+    if (discoveredSection) {
+        discoveredSection.style.display = 'none';
+    }
+
     const container = document.getElementById('nextPlanetContainer');
     if (container) {
         container.innerHTML = `

@@ -31,7 +31,7 @@ body {
 
 .page-header h1 {
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: bold;
     margin-top: 4.4rem;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
@@ -234,6 +234,12 @@ body {
     flex-direction: column;
     position: relative;
     overflow: hidden;
+}
+
+.planet-card .planet-icon {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
 }
 
 .planet-card::after {

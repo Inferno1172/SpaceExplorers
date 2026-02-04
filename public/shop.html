@@ -66,12 +66,86 @@
                 </div>
             </div>
         </nav>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+            <div class="offcanvas-header">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-rocket-takeoff-fill me-2 brand-icon"></i>
+                    <h5 class="offcanvas-title mb-0 fw-bold" id="mobileMenuLabel">
+                        Space Explorers
+                    </h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <ul class="navbar-nav mt-4 mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="bi bi-house-fill me-2"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="challenges.html">
+                            <i class="bi bi-lightning-fill me-2 brand-icon"></i> Challenges
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="discover.html">
+                            <i class="bi bi-rocket-takeoff-fill me-2"></i> Discover Planets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="shop.html">
+                            <i class="bi bi-wrench me-2"></i> Spacecraft Upgrades
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="mobileLoginNav">
+                        <a class="nav-link" href="login.html">
+                            <i class="bi bi-person-check-fill me-2"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item" id="mobileRegisterNav">
+                        <a class="nav-link" href="register.html">
+                            <i class="bi bi-person-plus-fill me-2"></i> Register
+                        </a>
+                    </li>
+
+                    <li class="nav-item d-none" id="mobileUserNav">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-circle me-2"></i>
+                            <span id="mobileNavUsername">User</span> | <span id="mobileNavPoints">0</span> pts
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="mobileLogoutNav">
+                        <a class="nav-link" href="#" id="mobileLogoutBtn">
+                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mobile-footer mt-auto pt-4">
+                    <div class="text-center">
+                        <div class="social-links d-flex justify-content-center gap-2">
+                            <a href="https://x.com/" class="social-link me-3"><i class="bi bi-twitter"></i></a>
+                            <a href="https://www.instagram.com/" class="social-link me-3"><i
+                                    class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/" class="social-link me-3"><i
+                                    class="bi bi-facebook"></i></a>
+                            <a href="https://www.linkedin.com/feed/" class="social-link"><i
+                                    class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main class="discover-container">
         <div class="page-header">
             <div class="page-header-content">
-                <h1><i class="bi bi-wrench-adjustable brand-icon"></i> Spacecraft Shop</h1>
+                <h1><i class="bi bi-wrench-adjustable"></i> Spacecraft Shop</h1>
                 <p>Upgrade your vessel with high-tech equipment to increase your efficiency.</p>
             </div>
 
@@ -89,6 +163,9 @@
             <button class="filter-btn" data-category="special">Special</button>
             <button class="filter-btn" data-category="cosmetic">Aesthetics</button>
         </div>
+
+        <!-- Auth Container -->
+        <div id="authContainer" class="mb-5"></div>
 
         <!-- Shop Grid -->
         <div id="shopList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

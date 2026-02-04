@@ -6,8 +6,15 @@ let currentUser = null;
 let authToken = null;
 let currentCategory = 'all';
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async function() {
     checkAuth();
+    
+    // Hide stats card immediately if not logged in
+    if (!currentUser) {
+        const statsCard = document.querySelector('.stats-card');
+        if (statsCard) statsCard.classList.add('d-none');
+    }
+    
     setupFilters();
     await loadShopData();
 });
@@ -25,9 +32,11 @@ function checkAuth() {
 
 function setupFilters() {
     const btns = document.querySelectorAll('.filter-btn');
-    btns.forEach(btn => {
-        btn.addEventListener('click', async () => {
-            btns.forEach(b => b.classList.remove('active'));
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', async function() {
+            btns.forEach(function(b) {
+                b.classList.remove('active');
+            });
             btn.classList.add('active');
             currentCategory = btn.dataset.category;
             await loadShopData();
@@ -38,6 +47,12 @@ function setupFilters() {
 async function loadShopData() {
     const container = document.getElementById('shopList');
     if (!container) return;
+
+    // If not logged in, show login required message
+    if (!currentUser) {
+        showLoginRequired();
+        return;
+    }
 
     try {
         const query = new URLSearchParams();
@@ -65,6 +80,7 @@ async function loadShopData() {
             }
         }
         
+        renderStats(null);
         renderShop(items, null);
 
     } catch (error) {
@@ -75,12 +91,29 @@ async function loadShopData() {
 
 function renderStats(data) {
     const mult = document.getElementById('pointsMultiplier');
-    if (mult) mult.textContent = data.points_multiplier;
+    const statsCard = document.querySelector('.stats-card');
+    
+    if (data) {
+        if (mult) mult.textContent = data.points_multiplier;
+        if (statsCard) statsCard.classList.remove('d-none');
+    } else {
+        if (statsCard) statsCard.classList.add('d-none');
+    }
 }
 
 function renderShop(items, shipData) {
     const container = document.getElementById('shopList');
     container.innerHTML = '';
+    
+    // Show filter tabs and shop list when logged in
+    const filterTabs = document.querySelector('.filter-tabs');
+    if (filterTabs) filterTabs.style.display = 'flex';
+    
+    if (container) container.style.display = 'flex';
+    
+    // Clear auth container
+    const authContainer = document.getElementById('authContainer');
+    if (authContainer) authContainer.innerHTML = '';
 
     if (items.length === 0) {
         container.innerHTML = '<div class="col-12 text-center py-5 opacity-50">No upgrades available in this category.</div>';
@@ -90,10 +123,10 @@ function renderShop(items, shipData) {
     const equippedIds = shipData ? shipData.upgrades : {};
     // Extract actual equipped IDs flattened
     const equippedUpgradeIds = shipData ? 
-        Object.values(shipData.upgrades).flat().filter(u => u.is_equipped).map(u => u.upgrade_id) 
+        Object.values(shipData.upgrades).flat().filter(function(u) { return u.is_equipped; }).map(function(u) { return u.upgrade_id; }) 
         : [];
 
-    container.innerHTML = items.map(item => {
+    container.innerHTML = items.map(function(item) {
         const isOwned = item.is_owned;
         const isLocked = item.is_locked;
         const isEquipped = equippedUpgradeIds.includes(item.upgrade_id);
@@ -109,7 +142,7 @@ function renderShop(items, shipData) {
                     <div class="upgrade-price">
                         ${isOwned ? 
                             '<span class="text-success"><i class="bi bi-check-circle-fill me-1"></i> Owned</span>' : 
-                            `<i class="bi bi-coin me-1"></i> ${item.price} pts`
+                            `<i class="fas fa-gas-pump"></i>  ${item.price} pts`
                         }
                     </div>
 
@@ -119,6 +152,8 @@ function renderShop(items, shipData) {
         `;
     }).join('');
 }
+
+
 
 function renderActionButton(item, isOwned, isLocked, isEquipped) {
     if (!currentUser) {
@@ -197,5 +232,27 @@ async function toggleEquip(upgradeId, currentlyEquipped) {
 
     } catch (error) {
         alert(error.message);
+    }
+}
+
+function showLoginRequired() {
+    // Hide filter tabs when not logged in
+    const filterTabs = document.querySelector('.filter-tabs');
+    if (filterTabs) filterTabs.style.display = 'none';
+
+    // Hide shop grid
+    const shopList = document.getElementById('shopList');
+    if (shopList) shopList.style.display = 'none';
+
+    const container = document.getElementById('authContainer');
+    if (container) {
+        container.innerHTML = `
+            <div class="planet-card text-center p-5 layer-flat">
+                <i class="bi bi-lock-fill planet-icon mb-4"></i>
+                <h2>Authorization Required</h2>
+                <p class="opacity-75">You must be logged in to access the spacecraft shop.</p>
+                <a href="login.html" class="btn btn-outline-warning mt-3">Login to Proceed</a>
+            </div>
+        `;
     }
 }
