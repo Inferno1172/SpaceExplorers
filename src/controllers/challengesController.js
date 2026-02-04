@@ -15,6 +15,10 @@ const model = require("../models/challengesModel");
  * @throws 500 on database error
  */
 module.exports.createNewChallenge = (req, res) => {
+  if (req.body.points > 50) {
+    return res.status(400).json({ message: "Points cannot exceed 50." });
+  }
+
   const data = {
     description: req.body.description,
     user_id: req.user.user_id, // Use ID from JWT
@@ -65,6 +69,10 @@ module.exports.readAllChallenges = (req, res) => {
  * @throws 500 on database error
  */
 module.exports.updateChallenge = (req, res) => {
+  if (req.body.points > 50) {
+    return res.status(400).json({ message: "Points cannot exceed 50." });
+  }
+
   const data = {
     challenge_id: parseInt(req.params.challenge_id),
     description: req.body.description,

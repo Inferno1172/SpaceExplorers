@@ -195,21 +195,32 @@ body {
 
 /* Modal Styling */
 .modal-content {
-  background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0f111a;
+  /* Darker, neutral background */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .modal-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .modal-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .btn-close {
-  filter: invert(1);
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+  filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(350deg);
+  /* Yellowish tint attempt or just white */
 }
 
 /* Empty State */
@@ -283,31 +294,31 @@ body {
 
 /* New Challenge Completion Styling */
 .completions-count {
-    background: rgba(102, 126, 234, 0.1);
-    color: #a0aec0;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 500;
+  background: rgba(102, 126, 234, 0.1);
+  color: #a0aec0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .completions-count i {
-    color: #667eea;
-    margin-right: 2px;
+  color: #667eea;
+  margin-right: 2px;
 }
 
 #attemptsList .list-group-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    margin-bottom: 8px;
-    border-radius: 8px !important;
-    transition: background 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  margin-bottom: 8px;
+  border-radius: 8px !important;
+  transition: background 0.2s;
 }
 
 #attemptsList .list-group-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #attemptsList .text-primary {
-    color: #667eea !important;
+  color: #667eea !important;
 }

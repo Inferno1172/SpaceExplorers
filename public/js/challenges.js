@@ -140,6 +140,12 @@ async function handleCreateChallenge(e) {
     const description = document.getElementById('challengeDescription').value;
     const points = parseInt(document.getElementById('challengePoints').value);
 
+    // Validate points
+    if (points > 50) {
+        alert("Points cannot exceed 50.");
+        return;
+    }
+
     try {
         const response = await fetch('/api/challenges', {
             method: 'POST',
@@ -177,6 +183,11 @@ async function handleUpdateChallenge() {
     const id = document.getElementById('editChallengeId').value;
     const description = document.getElementById('editChallengeDescription').value;
     const points = parseInt(document.getElementById('editChallengePoints').value);
+
+    if (points > 50) {
+        alert("Points cannot exceed 50.");
+        return;
+    }
 
     try {
         const response = await fetch(`/api/challenges/${id}`, {
@@ -280,9 +291,9 @@ async function viewMyAttempts(challengeId) {
 
         const attempts = await response.json();
         list.innerHTML = attempts.map(a => `
-            <div class="list-group-item bg-dark text-white border-secondary mb-2 rounded">
+            <div class="list-group-item mb-2">
                 <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1 text-info">Completion #${a.completion_id}</h6>
+                    <h6 class="mb-1 text-primary">Completion #${a.completion_id}</h6>
                     <small class="opacity-50"><i class="bi bi-check-circle-fill"></i></small>
                 </div>
                 <p class="mb-0 small">${a.details || 'No details provided.'}</p>
