@@ -1,0 +1,262 @@
+:root {
+    /* Muted Gold/Yellow Theme to match Challenges & Discover */
+    --primary-gradient: linear-gradient(135deg, #fff453 0%, #d4c432 100%);
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #f59e0b;
+    --text-muted: #94a3b8;
+}
+
+body {
+    background: linear-gradient(135deg, #000000 0%, #111320 100%);
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+
+.brand-icon {
+    /* Use gradient for brand icon text if possible, or fallback color */
+    color: #fff453;
+}
+
+/* Page Header & Stats */
+.page-header {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.stats-card {
+    background: rgba(255, 244, 83, 0.05);
+    border: 1px solid rgba(255, 244, 83, 0.2);
+    border-radius: 20px;
+    padding: 1.5rem 2.5rem;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(255, 244, 83, 0.05);
+}
+
+.multiplier-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.multiplier-label {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* Filters */
+.filter-tabs {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    color: #0f172a;
+    /* Dark text on gold */
+    box-shadow: 0 4px 15px rgba(255, 244, 83, 0.3);
+}
+
+/* Shop Cards */
+.upgrade-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.upgrade-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.03), transparent);
+    pointer-events: none;
+}
+
+.upgrade-card:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 244, 83, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.upgrade-card.locked {
+    opacity: 0.75;
+}
+
+.category-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f59e0b;
+    /* Darker gold/orange for readability */
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upgrade-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.upgrade-benefit {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.upgrade-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.upgrade-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff453;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Actions */
+.btn-purchase {
+    background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem;
+    width: 100%;
+    font-weight: 600;
+    color: white;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(237, 137, 54, 0.2);
+}
+
+.btn-purchase:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(237, 137, 54, 0.3);
+}
+
+.btn-equip {
+    background: transparent;
+    border: 1px solid rgba(255, 244, 83, 0.3);
+    color: #fff453;
+    border-radius: 12px;
+    padding: 0.8rem;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-equip:hover {
+    background: rgba(255, 244, 83, 0.1);
+    border-color: #fff453;
+}
+
+.btn-equip.active {
+    background: #fff453;
+    color: #0f172a;
+    border-color: #fff453;
+}
+
+.lock-overlay {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.lock-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    display: block;
+    color: #cbd5e1;
+}
+
+/* Shop Container Spacing to match Discover */
+/* Main Container */
+.discover-container {
+    padding: 120px 20px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stats-card {
+        width: 100%;
+    }
+}
