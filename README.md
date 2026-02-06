@@ -16,64 +16,75 @@ This application demonstrates a complete full-stack architecture. It features a 
 
 ## 📚 Table of Contents
 
-* [Features](#-features)
-* [Technologies Used](#-technologies-used)
-* [Project Structure](#-project-structure)
-* [Installation & Setup](#-installation--setup)
-* [Environment Variables](#-environment-variables)
-* [API Endpoints](#-api-endpoints)
-* [License](#-license)
+- [Features](#-features)
+- [Technologies Used](#-technologies-used)
+- [Project Structure](#-project-structure)
+- [Installation & Setup](#-installation--setup)
+- [Environment Variables](#-environment-variables)
+- [API Endpoints](#-api-endpoints)
+- [License](#-license)
 
 ---
 
 ## ✨ Features
 
 ### 💻 Frontend Experience
-* **Responsive Design** – Optimized for both desktop and mobile devices
-* **Dynamic IO** – Real-time UI updates using Vanilla JavaScript & DOM manipulation
-* **Interactive HUD** – Visual feedback for points, fuel, and game status
-* **Space Theming** – Immersive visual design with shop and discovery interfaces
+
+- **Responsive Design** – Optimized for both desktop and mobile devices
+- **Dynamic IO** – Real-time UI updates using Vanilla JavaScript & DOM manipulation
+- **Interactive HUD** – Visual feedback for points, fuel, and game status
+- **Space Theming** – Immersive visual design with shop and discovery interfaces
 
 ### 🔐 User & Security
-* **Secure Auth** – JWT-based session management
-* **Protection** – Google reCAPTCHA v2 & Bcrypt password hashing
-* **Account Management** – Password reset via email & profile updates
+
+- **Secure Auth** – JWT-based session management
+- **Protection** – Google reCAPTCHA v2 & Bcrypt password hashing
+- **Account Management** – Password reset via email & profile updates
 
 ### 🏆 Gamification
-* **Leaderboard** – Global ranking system based on total points
-* **Achievements** – Unlockable badges for milestones
-* **Progression** – Earn points to purchase upgrades and explore further
+
+- **Leaderboard** – Global ranking system based on total points
+- **Achievements** – Unlockable badges for milestones
+- **Progression** – Earn points to purchase upgrades and explore further
 
 ### 🧠 Wellness Challenges
-* **Challenge Board** – View and participate in daily wellness tasks
-* **Tracking** – Record completions and view history
-* **Community** – See what challenges others are attempting
+
+- **Challenge Board** – View and participate in daily wellness tasks
+- **Tracking** – Record completions and view history
+- **Community** – See what challenges others are attempting
 
 ### 🌌 Space Adventure
-* **Planet Discovery** – Unlock new planets as you travel
-* **Space Shop** – Purchase upgrades (Fuel Tanks, Thrusters, etc.)
-* **Inventory Management** – Equip/Unequip spacecraft modifications
+
+- **Planet Discovery** – Unlock new planets as you travel
+- **Space Shop** – Purchase upgrades (Fuel Tanks, Thrusters, etc.)
+- **Inventory Management** – Equip/Unequip spacecraft modifications
 
 ---
 
 ## 🛠 Technologies Used
 
 ### Frontend
-* **HTML5** – Semantic structure
-* **CSS3** – Custom responsive styling (Flexbox/Grid)
-* **JavaScript (ES6+)** – DOM manipulation & async API logic
-* **Fetch API** – Handling client-server communication
+
+- **HTML5** – Semantic structure
+- **CSS3** – Custom responsive styling (Flexbox/Grid)
+- **Bootstrap** – Responsive layout and components
+- **JavaScript (ES6+)** – DOM manipulation & async API logic
+- **Fetch API** – Handling client-server communication
 
 ### Backend
-* **Node.js** & **Express** – Server-side logic and API routing
-* **MySQL** (via `mysql2`) – Relational database for persistent storage
-* **JWT** – JSON Web Tokens for stateless authentication
-* **Bcrypt** – Security hashing algorithm
-* **Nodemailer** – Email service integration
+
+- **Node.js** & **Express** – Server-side logic and API routing
+- **MySQL** (via `mysql2`) – Relational database for persistent storage
+- **JWT** – JSON Web Tokens for stateless authentication
+- **Bcrypt** – Security hashing algorithm
+- **Nodemailer** – Email service integration
+- **Axios** – Make external API requests e.g. Google reCAPTCHA
+- **Crypto** – Create a password reset token that lasts 1 hour
 
 ### Dev Tools
-* **Nodemon** – Development server monitoring
-* **Git** – Version control
+
+- **Nodemon** – Development server monitoring
+- **Git** – Version control
 
 ---
 
@@ -111,7 +122,7 @@ BED-CA2-MOIZ/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/ST0503-BED/bed-ca2-moiz.git
+git clone https://github.com/Inferno1172/SpaceExplorers
 cd bed-ca2-moiz
 ```
 
@@ -123,8 +134,8 @@ npm install
 
 ### 3️⃣ Setup Database
 
-* Create a MySQL database (default: `ca2`)
-* Run the initialization scripts:
+- Create a MySQL database (default: `ca2`)
+- Run the initialization scripts:
 
 ```bash
 npm run init_tables
@@ -156,40 +167,62 @@ npm run dev
 
 🚀 **App is live at:** `http://localhost:3000`
 
+### NPM Scripts
+
+- `npm run init_tables` — Creates the database schema and initial tables by running `src/configs/createSchema.js` followed by `src/configs/initTables.js`. Make sure your MySQL server is running and the database connection settings in `.env` are correct before running this.
+- `npm run dev` — Start the development server with `nodemon` (auto-restarts on file changes). For a production start use `npm start` which runs `node index.js`.
+
 ---
 
 ## 🔐 Environment Variables
 
-| Variable | Description |
-| :--- | :--- |
-| `DB_HOST` | Database host (e.g., localhost) |
-| `DB_USER` | Database username |
-| `DB_PASSWORD` | Database password |
-| `DB_DATABASE` | Name of the database |
-| `JWT_SECRET` | Secret key for signing tokens |
-| `RECAPTCHA_SECRET_KEY` | Google reCAPTCHA v2 Secret |
-| `EMAIL_USER` | Email address for sending notifications |
-| `EMAIL_PASSWORD` | App password for the email account |
+| Variable               | Description                             |
+| :--------------------- | :-------------------------------------- |
+| `DB_HOST`              | Database host (e.g., localhost)         |
+| `DB_USER`              | Database username                       |
+| `DB_PASSWORD`          | Database password                       |
+| `DB_DATABASE`          | Name of the database                    |
+| `JWT_SECRET`           | Secret key for signing tokens           |
+| `RECAPTCHA_SECRET_KEY` | Google reCAPTCHA v2 Secret              |
+| `EMAIL_USER`           | Email address for sending notifications |
+| `EMAIL_PASSWORD`       | App password for the email account      |
 
 ---
 
 ## 🚀 API Endpoints
 
+This application exposes a total of **22** API endpoints across the `users`, `challenges`, and `space` features (all mounted under the `/api` prefix).
+
 ### 👤 User Management
-* `POST /api/users/register` – Create account
-* `POST /api/users/login` – Authenticate & get token
-* `GET /api/users/leaderboard` – View top players
+
+- `POST /api/users/register` — Register new user
+- `POST /api/users/login` — Login and receive JWT
+- `POST /api/users/forgot-password` — Request password reset
+- `POST /api/users/reset-password` — Reset password with token
+- `GET  /api/users/leaderboard` — View leaderboard
+- `GET  /api/users` — Get all users (requires auth)
+- `PUT  /api/users/:user_id` — Update user (self-only)
+- `GET  /api/users/:user_id` — Get specific user (requires auth)
 
 ### 🧩 Challenges
-* `GET /api/challenges` – List all active challenges
-* `POST /api/challenges/:id` – Complete a challenge
-* `GET /api/challenges/:id` – View completion history
+
+- `POST   /api/challenges/` — Create a new challenge
+- `GET    /api/challenges/` — List all challenges
+- `PUT    /api/challenges/:challenge_id` — Update a challenge (owner only)
+- `DELETE /api/challenges/:challenge_id` — Delete a challenge (owner only)
+- `POST   /api/challenges/:challenge_id/completions` — Create a completion
+- `GET    /api/challenges/:challenge_id/completions` — Get completions for a challenge
+- `GET    /api/challenges/:challenge_id/my-completions` — Get your completions for a challenge
 
 ### 🌌 Space Systems
-* `GET /api/space/journey/:id` – Get player journey data
-* `POST /api/space/discover` – Trigger planet discovery
-* `GET /api/space/shop` – Fetch available upgrades
-* `POST /api/space/purchase` – Buy items using points
+
+- `GET  /api/space/journey/:user_id` — Get a user's space journey
+- `POST /api/space/discover` — Discover a new planet
+- `GET  /api/space/shop` — Browse spacecraft shop
+- `POST /api/space/shop/purchase` — Purchase an upgrade
+- `GET  /api/space/spacecraft/:user_id` — Get user's spacecraft and upgrades
+- `PUT  /api/space/spacecraft/toggle` — Toggle upgrade equipped status
+- `GET  /api/space/achievements/:user_id` — Get user's achievements
 
 ---
 
